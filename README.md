@@ -1,16 +1,191 @@
-## Hi there 👋
+홈페이지 설명 : 나의 프로필과 다뤄보고 배우고 있는 프로그래밍 언어(스킬), 제작했던 프로그램과 앞으로 제작할 프로그램, 미래 희망 직업들을 설명하는 이력서 홈페이지 입니다.
+github 주소 : https://github.com/emflans06/emflans06.git
 
-<!--
-**emflans06/emflans06** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+js파일 코드
 
-Here are some ideas to get you started:
+기능 제목 : 스크롤 복원 및 스크롤 이동
+기능 설명 : 코드의 첫 부분에서는 브라우저의 `history.scrollRestoration` 속성을 'manual'로 설정하여, 페이지를 새로고침하거나 뒤로 가기 했을 때 자동으로 스크롤 위치가 복원되지 않도록 합니다. 그리고 페이지가 로드될 때 항상 맨 위(0,0)로 스크롤을 이동시킵니다. 또한 `.scroll-top` 클래스를 가진 버튼을 클릭하면 부드럽게 페이지 상단으로 스크롤되도록 이벤트를 등록합니다.
+js 코드 :
+   if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.addEventListener('load', () => {
+  window.scrollTo(0, 0);
+});
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+document.querySelectorAll('.scroll-top').forEach(button => {
+    button.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });  
+});
+코드 설명 : 
+scrollRestoration = 'manual': 브라우저가 자동으로 스크롤 위치를 복원하지 않도록 막음
+window.scrollTo(0, 0): 페이지 로드 시 스크롤을 최상단으로 이동
+.scroll-top 클래스를 가진 모든 버튼에 클릭 이벤트 설정
+클릭 시 부드럽게 상단으로 스크롤 이동
+
+기능 제목 : 프로젝트 상세 정보 관리
+기능 설명 : `projectDetails` 객체는 여러 프로젝트의 제목과 설명을 저장하고 있습니다. 각 프로젝트는 고유 키로 구분되며, 제목과 상세 설명(여러 줄 문자열) 정보를 포함합니다. 이 정보는 모달 창에 표시될 때 사용됩니다.
+js 코드 :
+const projectDetails = {
+  'cat_soup_ver1,2': {
+    title: '1. cat_soup_ver1,2',
+    description: `
+    - 개발 기간: 2025.06.06 ~ 2025.06.09
+    - 개발 인원: 1명
+    - 개발 환경: C
+    - 프로젝트 소개: 텍스트를 통해서 입출력 정보를 주고 받는 게임입니다.
+    - 주요 기능: 
+      * 입력 및 출력 시스템
+      * 게임 자원 상태 관리
+      * 게임 상점 시스템
+      * 게임 로직 관리
+    `
+  },
+  'avoid_arrow_cat': {
+    title: '2. avoid_arrow_cat',
+    description: `
+    - 개발 기간: 2023.07.02 ~ 2023.07.24
+    - 개발 인원: 1명
+    - 개발 환경: Unity
+    - 프로젝트 소개: 화살을 피하는 고양이 게임입니다.
+    - 주요 기능:
+      * 플레이어 조작
+      * 화살 생성 및 패턴
+      * 점수 시스템
+      * 게임 오버 및 재시작 기능
+      * UI 구성
+    `
+  },
+  'project FTM': {
+    title: '3. project FTM',
+    description: `
+    - 개발 기간: 2024.12.11 ~ 2024.01.21
+    - 개발 인원: 2명
+    - 개발 환경: Unity, C++
+    - 프로젝트 소개: 3D 탱크 배틀 게임입니다.
+    - 담당 파트:
+      * 맵 및 오브젝트 생성
+      * 탱크 조작 및 AI
+      * 총알 발사 및 충돌 처리
+      * 게임 로직 구현
+    `
+  },
+  'project1 (예정)': {
+    title: '4. project (예정)',
+    description: `
+    - 개발 기간: 2025.07 ~
+    - 개발 인원: 1명
+    - 개발 환경: Unity, C#
+    - 프로젝트 소개: 2D x,y,z 좌표에서 캐릭터가 이동하고 점프하는 게임입니다.
+    - 주요 기능:
+      * 캐릭터 이동 및 점프
+      * 자원 채취 밑 인벤토리 시스템
+      * 레벨 디자인 및 진행 관리
+    `
+  },
+  'project2 (예정)': {
+    title: '5. project (예정)',
+    description: `
+    - 개발 기간: 2025.07 ~
+    - 개발 인원: 1명
+    - 개발 환경: Unity, C#
+    - 프로젝트 소개: 2D x,y 좌표에서 캐릭터가 이동하고 점프하는 게임입니다.
+    - 주요 기능:
+      * 캐릭터 이동 및 점프
+      * 자원 채취 밑 인벤토리 시스템
+      * 레벨 디자인 및 진행 관리
+      * UI 구성 및 상태 표시
+      * 적 AI 및 상호작용
+      * 모바일 최적화 적용
+    `
+  }
+};
+코드 설명 : 
+프로젝트의 정보들을 고유키의 값에 따라 분리함
+
+기능 제목 : 프로젝트 모달 동작
+기능 설명 : `.project-btn` 클래스를 가진 버튼에 클릭 이벤트를 등록하여, 사용자가 버튼을 클릭하면 해당 프로젝트의 제목을 추출하고, `projectDetails`에서 일치하는 정보를 찾아 모달 창에 표시합니다. 설명 문자열의 줄바꿈은 `<br>` 태그로 변환되어 HTML에 맞게 출력됩니다. 모달 창은 `.close-btn`을 클릭하거나, 모달 바깥 영역을 클릭하면 닫히도록 구현되어 있습니다.
+js 코드 : 
+document.querySelectorAll('.project-btn').forEach(button => {
+  button.addEventListener('click', function() {
+    const projectItem = this.closest('.project-item');
+    const projectTitle = projectItem.querySelector('h3').textContent.substring(3);
+    const details = projectDetails[projectTitle];
+    
+    if (details) {
+      document.querySelector('.modal-title').textContent = details.title;
+      document.querySelector('.modal-text').innerHTML = details.description.replace(/\n/g, '<br>');
+      document.getElementById('projectModal').style.display = 'block';
+    }
+  });
+});
+
+document.querySelector('.close-btn').addEventListener('click', function() {
+  document.getElementById('projectModal').style.display = 'none';
+});
+
+window.addEventListener('click', function(event) {
+  if (event.target == document.getElementById('projectModal')) {
+    document.getElementById('projectModal').style.display = 'none';
+  }
+});
+코드 설명 :
+각 프로젝트의 버튼(.project-btn)을 누르면 상위 요소에서 <h3>의 텍스트(프로젝트 제목)를 가져옴
+projectDetails 객체에서 해당 프로젝트 정보를 찾아 모달창에 표시
+\n은 <br>로 변환하여 줄바꿈 유지
+.close-btn 클릭 또는 모달 바깥 영역 클릭 시 모달창을 닫음
+
+기능 제목 : 섹션 애니메이션 효과 
+기능 설명 : 마지막 부분에서는 `IntersectionObserver`를 사용하여, 특정 섹션이 화면에 일정 부분(20%) 보일 때 `.visible` 클래스를 추가합니다. 이로 인해 CSS 애니메이션 효과를 줄 수 있습니다. `#profile`을 제외한 모든 `section` 요소에 대해 이 애니메이션이 적용됩니다.
+js 코드 : 
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        } 
+        else {
+            entry.target.classList.remove('visible');
+        }
+    });
+}, {
+    threshold: 0.2, 
+    rootMargin: '0px'  
+});
+
+document.querySelectorAll('section:not(#profile)').forEach(section => {
+    section.classList.add('section-animate');
+    observer.observe(section);
+});
+코드 설명 : 
+IntersectionObserver를 사용해 특정 섹션이 뷰포트 안으로 20% 이상 보이면 visible 클래스 추가 → 애니메이션 활성화
+section-animate 클래스는 기본 스타일로 미리 지정되어 있어야 함
+
+참고 
+- `projectDetails` 객체에서 동일한 키('project (예정)')가 두 번 사용되고 있어, 마지막 값만 남게 됩니다. 각 프로젝트마다 고유한 키를 사용하는 것이 좋습니다.
+- 프로젝트 제목을 추출할 때 `substring(3)`을 사용하고 있는데, 제목 앞의 번호와 점(`1. ` 등)을 제거하려는 의도로 보입니다. 만약 제목 형식이 바뀌면 이 부분이 제대로 동작하지 않을 수 있습니다.
+
+기능 제목 : css 파일 애니메이션 코드
+기능 설명 :애니메이션은 요소가 아래쪽(100px)에서 위로 이동하면서 점점 투명도(opacity)가 0에서 1로 변하는 효과를 만듭니다.
+
+css 코드 : 
+@keyframes titleUp {
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+코드 설명 : 애니메이션의 시작(0%)에서는 요소가 아래로 100픽셀 이동되어 있고 완전히 투명
+애니메이션이 끝나는 시점(100%)에는 요소가 원래 위치로 돌아오고 완전히 불투명 
+
+참고
+-이 애니메이션을 실제로 적용하려면, CSS에서 `animation` 속성을 사용해 해당 요소에 `titleUp`을 지정해야 함
+-예를 들어, `animation: titleUp 1s ease;`와 같이 사용
